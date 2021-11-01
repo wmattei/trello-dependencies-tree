@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { pages } from "./pages/pages";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 function App() {
   useEffect(() => {
@@ -6,14 +8,28 @@ function App() {
       'card-buttons': () => {
         return [{
           icon: 'https://cdn.trello.com/1/templates/f0d8b8c4.svg',
-          text: 'Dependencies',
+          text: 'Add dependency',
+          callback: (t: any) => {
+            t.popup({
+              title: 'Select card',
+              url: pages.addDependency.path
+            })
+          }
         }]
       }
     })
   }, [])
+  
   return (
-    <h1>Hello world</h1>
-  );
+    <BrowserRouter>
+      <Switch>
+        {Object.values(pages).map(({component, path}) => {
+          console.info(path);
+          return <Route exact key={path} path={path} component={component} />
+        })}
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
 export default App;
