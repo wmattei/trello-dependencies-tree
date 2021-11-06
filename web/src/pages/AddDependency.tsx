@@ -8,13 +8,13 @@ export function AddDependency() {
   useEffect(() => {
     if (!token) return
 
-    fetch(`https://api.trello.com/1/boards/${context?.board}/cards`).then(
-      (res) => {
-        res.json().then((data) => {
-          console.info(data)
-        })
-      }
-    )
+    fetch(
+      `https://api.trello.com/1/boards/${context?.board}/cards?key=23e77db94cdf4ac74ac40e63cb8be4ce&token=${token}`
+    ).then((res) => {
+      res.json().then((data) => {
+        console.info(data)
+      })
+    })
   }, [token, context?.board])
 
   if (isLoading) return <span>Loading...</span>
