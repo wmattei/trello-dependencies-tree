@@ -1,27 +1,18 @@
-import { useEffect } from 'react'
+import { useTrelloApi } from 'hooks/useTrelloApi'
 
 export function AddDependency() {
-  useEffect(() => {
-    const t = window.TrelloPowerUp.iframe({
-      appKey: '23e77db94cdf4ac74ac40e63cb8be4ce',
-      appName: 'Dependencies Tree',
-    })
+  const { isAuthenticated, isLoading, authorize, error, token } = useTrelloApi()
 
-    const restApi = t.getRestApi()
+  console.info(error)
+  if (isLoading) return <span>Loading...</span>
 
-    restApi.isAuthorized().then((isAuthorized: boolean) => {
-      console.info(isAuthorized)
-      if (!isAuthorized) {
-        restApi.authorize({ scope: 'read,write' }).then(function (t: any) {
-          console.info(t)
-        })
-      } else {
-        restApi.getToken().then((token: any) => {
-          console.info(token)
-        })
-      }
-    })
-  }, [])
+  if (!isAuthenticated)
+    return (
+      <button className="mod-primary" onClick={authorize}>
+        Authorize
+      </button>
+    )
+  console.info(token)
 
   return (
     <blockquote className="trello-card-compact">
