@@ -10,7 +10,7 @@ const trelloFunctions = {
         text: 'Add dependency',
         callback: (t: any) => {
           t.popup({
-            title: 'This cards depends on...',
+            title: 'This cards unblocks...',
             url: pages.addDependency.path,
           })
         },

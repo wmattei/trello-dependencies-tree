@@ -1,9 +1,13 @@
 import { useTrelloApi } from 'hooks/useTrelloApi'
 
 export function AddDependency() {
-  const { isAuthenticated, isLoading, authorize, error, token } = useTrelloApi()
+  const { isAuthenticated, isLoading, authorize, restApi } = useTrelloApi()
 
-  console.info(error)
+  console.info(restApi.get)
+  // useEffect(() => {
+  //   if (!token) return
+  // }, [token])
+
   if (isLoading) return <span>Loading...</span>
 
   if (!isAuthenticated)
@@ -12,7 +16,6 @@ export function AddDependency() {
         Authorize
       </button>
     )
-  console.info(token)
 
   return (
     <blockquote className="trello-card-compact">
