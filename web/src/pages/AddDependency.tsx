@@ -1,19 +1,18 @@
 import { loadCards } from 'api/trello'
 import { useTrelloAuth } from 'hooks/useTrelloAuth'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export function AddDependency() {
   const { isAuthenticated, isLoading, authorize, token, context } =
     useTrelloAuth()
 
+  const [cards, setCards] = useState<any[]>([])
+
   useEffect(() => {
     if (!token) return
 
-    const boards = loadCards(context?.board, token)
-
-    console.info(boards)
+    loadCards(context?.board, token).then(setCards)
   }, [token, context?.board])
-
   if (isLoading) return <span>Loading...</span>
 
   if (!isAuthenticated)
@@ -22,6 +21,8 @@ export function AddDependency() {
         Authorize
       </button>
     )
+
+  console.info(cards)
 
   return (
     <blockquote className="trello-card-compact">
