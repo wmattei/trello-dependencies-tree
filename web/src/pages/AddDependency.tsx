@@ -9,10 +9,10 @@ export function AddDependency() {
 
     const restApi = t.getRestApi()
 
-    console.info(restApi)
-
-    restApi.isAuthorized().then((isAuthorized: any) => {
-      console.info(isAuthorized)
+    restApi.isAuthorized().then(() => {
+      restApi.getToken().then((token: any) => {
+        console.info(token)
+      })
     })
   }, [])
 
