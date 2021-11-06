@@ -11,9 +11,15 @@ export function AddDependency() {
 
     restApi.isAuthorized().then((isAuthorized: boolean) => {
       console.info(isAuthorized)
-      restApi.getToken().then((token: any) => {
-        console.info(token)
-      })
+      if (!isAuthorized) {
+        restApi.authorize({ scope: 'read,write' }).then(function (t: any) {
+          console.info(t)
+        })
+      } else {
+        restApi.getToken().then((token: any) => {
+          console.info(token)
+        })
+      }
     })
   }, [])
 
