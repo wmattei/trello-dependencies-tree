@@ -1,20 +1,17 @@
-import { useTrelloApi } from 'hooks/useTrelloApi'
+import { loadCards } from 'api/trello'
+import { useTrelloAuth } from 'hooks/useTrelloAuth'
 import { useEffect } from 'react'
 
 export function AddDependency() {
   const { isAuthenticated, isLoading, authorize, token, context } =
-    useTrelloApi()
+    useTrelloAuth()
 
   useEffect(() => {
     if (!token) return
 
-    fetch(
-      `https://api.trello.com/1/boards/${context?.board}/cards?key=23e77db94cdf4ac74ac40e63cb8be4ce&token=${token}`
-    ).then((res) => {
-      res.json().then((data) => {
-        console.info(data)
-      })
-    })
+    const boards = loadCards(context?.board, token)
+
+    console.info(boards)
   }, [token, context?.board])
 
   if (isLoading) return <span>Loading...</span>

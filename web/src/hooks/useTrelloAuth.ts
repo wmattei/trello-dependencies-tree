@@ -1,6 +1,7 @@
+import { APP_KEY, APP_NAME } from '../constants'
 import { useEffect, useState } from 'react'
 
-type UseTrelloApiReturn = {
+type UseTrelloAuthReturn = {
   isLoading: boolean
   isAuthenticated: boolean
   error?: string
@@ -10,7 +11,7 @@ type UseTrelloApiReturn = {
   context: any
 }
 
-export function useTrelloApi(): UseTrelloApiReturn {
+export function useTrelloAuth(): UseTrelloAuthReturn {
   const [isLoading, setIsLoading] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [error, setError] = useState<string | undefined>()
@@ -20,8 +21,8 @@ export function useTrelloApi(): UseTrelloApiReturn {
 
   useEffect(() => {
     const t = window.TrelloPowerUp.iframe({
-      appKey: '23e77db94cdf4ac74ac40e63cb8be4ce',
-      appName: 'Dependencies Tree',
+      appKey: APP_KEY,
+      appName: APP_NAME,
     })
 
     setContext(t.getContext())
