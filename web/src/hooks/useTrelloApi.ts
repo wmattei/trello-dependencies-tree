@@ -43,6 +43,8 @@ export function useTrelloApi(): UseTrelloApiReturn {
     } catch (error: any) {
       setError(error)
     }
+
+    setIsLoading(true)
   }
 
   async function authorize() {
