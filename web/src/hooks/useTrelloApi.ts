@@ -44,7 +44,7 @@ export function useTrelloApi(): UseTrelloApiReturn {
       setError(error)
     }
 
-    setIsLoading(true)
+    setIsLoading(false)
   }
 
   async function authorize() {
