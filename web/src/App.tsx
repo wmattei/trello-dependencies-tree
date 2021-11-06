@@ -21,10 +21,7 @@ const trelloFunctions = {
 
 function App() {
   useEffect(() => {
-    window.TrelloPowerUp.initialize(trelloFunctions, {
-      appKey: '23e77db94cdf4ac74ac40e63cb8be4ce',
-      appName: 'Dependencies Tree',
-    })
+    window.TrelloPowerUp.initialize(trelloFunctions)
   }, [])
 
   return (
