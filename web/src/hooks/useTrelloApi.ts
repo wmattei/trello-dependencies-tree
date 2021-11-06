@@ -7,6 +7,7 @@ type UseTrelloApiReturn = {
   token?: string
   restApi?: any
   authorize: () => void
+  context: any
 }
 
 export function useTrelloApi(): UseTrelloApiReturn {
@@ -15,12 +16,15 @@ export function useTrelloApi(): UseTrelloApiReturn {
   const [error, setError] = useState<string | undefined>()
   const [token, setToken] = useState<string | undefined>()
   const [restApi, setRestApi] = useState<any>()
+  const [context, setContext] = useState<any>()
 
   useEffect(() => {
     const t = window.TrelloPowerUp.iframe({
       appKey: '23e77db94cdf4ac74ac40e63cb8be4ce',
       appName: 'Dependencies Tree',
     })
+
+    setContext(t.getContext())
 
     setIsLoading(true)
 
@@ -58,5 +62,6 @@ export function useTrelloApi(): UseTrelloApiReturn {
     token,
     restApi,
     authorize,
+    context,
   }
 }
