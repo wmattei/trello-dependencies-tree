@@ -3,7 +3,7 @@ import { useTrelloApi } from 'hooks/useTrelloApi'
 export function AddDependency() {
   const { isAuthenticated, isLoading, authorize, restApi } = useTrelloApi()
 
-  console.info(restApi?.get)
+  console.info(restApi)
   // useEffect(() => {
   //   if (!token) return
   // }, [token])
