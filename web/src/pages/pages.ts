@@ -1,8 +1,8 @@
-import { AddDependency } from "./AddDependency";
+import { AddDependency } from './AddDependency'
 
 export const pages = {
   addDependency: {
-    path: "/add-dependency",
+    path: '/add-dependency',
     component: AddDependency,
   },
-};
+}

@@ -1,6 +1,9 @@
 interface Window {
   TrelloPowerUp: {
-    initialize: (options: Record<string, any>) => void;
-    iframe: () => void;
-  };
+    initialize: (
+      functions: Record<string, any>,
+      options: Record<string, any>
+    ) => void
+    iframe: () => any
+  }
 }

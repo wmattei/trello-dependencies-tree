@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "react-app",
+    "@afyadigital/eslint-config-base",
+    "@afyadigital/eslint-config-react"
+  ]
+}
