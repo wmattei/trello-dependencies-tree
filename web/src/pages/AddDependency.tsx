@@ -1,6 +1,6 @@
 import { loadCards } from 'api/trello'
 import { useTrelloAuth } from 'hooks/useTrelloAuth'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { TrelloCard } from 'types'
 
 export function AddDependency() {
@@ -11,9 +11,13 @@ export function AddDependency() {
 
   useEffect(() => {
     if (!token) return
-    console.info(context)
     loadCards(context?.board, token).then(setCards)
   }, [token, context?.board])
+
+  const filteredCards = useMemo(() => {
+    return cards.filter((card) => card.id !== context?.card)
+  }, [cards, context])
+
   if (isLoading) return <span>Loading...</span>
 
   if (!isAuthenticated)
@@ -25,7 +29,7 @@ export function AddDependency() {
 
   return (
     <div>
-      {cards.map((card) => (
+      {filteredCards.map((card) => (
         <div>{card.name}</div>
       ))}
     </div>
